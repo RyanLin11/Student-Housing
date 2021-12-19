@@ -1,0 +1,12 @@
+extends Layout 
+
+block content 
+    form(method='POST' action='/users/profile/edit')
+        label(for='username') Username:
+        input(type='text' id='username' placeholder=user.username disabled)
+        br
+        label(for='email') Email: 
+        input(type='email' id='email' name='email' placeholder=user.email)
+        br
+        input(type='submit' value='Update Profile')
+    br

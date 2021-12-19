@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css')
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p' crossorigin='anonymous')
+    block meta
+  body
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark 
+      a.navbar-brand(href='/listing') 
+        div(style='display: flex; flex-direction: row; align-items: center')
+          img.logo(src="https://icons.iconarchive.com/icons/google/noto-emoji-travel-places/1024/42486-house-icon.png")
+          h3 Student Housing
+      button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+        span.navbar-toggler-icon 
+      div.collapse.navbar-collapse(id='navbarNav') 
+        ul.navbar-nav 
+          li.nav-item 
+            a.nav-link(href='/listing') View Properties 
+          li.nav-item
+            a.nav-link(href='/listing/add') Add Listing
+          if authenticated 
+            li.nav-item 
+              a.nav-link(href=`/users/profile/${username}`) Hello, #{username}
+            li.nav-item 
+              a.nav-link(href='/users/logout') Logout
+          else
+            li.nav-item 
+              a.nav-link(href='/users/login') Login
+            li.nav-item 
+              a.nav-link(href='/users/register') Register
+    br
+    block content

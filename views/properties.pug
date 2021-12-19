@@ -1,0 +1,16 @@
+extends Layout
+
+block content
+    table.table.table-responsive.thead-dark.table-striped.table-bordered.table-hover
+        thead 
+            tr 
+                th.text-center.align-middle(scope='col') Photo
+                th.text-center.align-middle(scope='col') Property
+                th.text-center.align-middle(scope='col') Address
+            tbody 
+            each building in buildings 
+                tr
+                    td.text-center.align-middle N/A
+                    td.text-center.align-middle= listing.name 
+                    td.text-center.align-middle= listing.address
+                    

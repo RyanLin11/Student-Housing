@@ -1,0 +1,56 @@
+extends layout
+
+block meta
+  script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCCu5nIkg8RtVy0g4Gm6hO5Gw1v0T7e_4c&libraries=places&callback=initMap')
+
+block content
+  form(method='POST' action='http://127.0.0.1:3000/listing/add')
+    div.input-group 
+      span.input-group-text 
+        i.bi.bi-map 
+      div.form-floating 
+        input.form-control(type='text' id='autocomplete' placeholder='Location' required) 
+        label.form-label(for='autocomplete') Location
+    br
+    input(type='text' id='place_id' name='place_id' hidden=true)
+    div.input-group
+      span.input-group-text $
+      div.form-floating
+        input.form-control(type='number' id='price' name='price' placeholder='1000' required)
+        label.form-label(for='price') Price
+    br
+    div.form-floating 
+      select.form-select(id='type' name='type' required)
+        option(selected value="One-Bedroom Apartment") One-Bedroom Apartment
+        option(value="Shared Apartment") Shared Apartment
+        option(value="Shared House") Shared House
+      label.form-label(for='type') Accommodation Type
+    br
+    div.input-group 
+      span.input-group-text
+        i.bi.bi-door-closed
+      div.form-floating
+        input.form-control(type='number' id='room' name='room' placeholder='1' required)
+        label.form-label(for='room') Room No.
+    br
+    div.form-floating
+      input.form-control(type='date' id='move-in-date' name='moveInDate')
+      label.form-label(for='move-in-date') Move-In Date: 
+    br
+    div.form-floating
+      input.form-control(type='date' id='move-out-date' name='moveOutDate')
+      label.form-label(for='move-out-date') Move-Out Date: 
+    br
+    div.form-floating
+      input.form-control(type='email' id='email' name='email' placeholder='johndoe@gmail.com' required)
+      label.form-label(for='email') Contact Email
+    br
+    div.form-floating
+      input.form-control(type='text' id='photo' name='photo' placeholder='google.com')
+      label.form-label(for='photo') Photo URL
+    br
+    input.btn.btn-primary(type='submit' value='Post Listing')
+    br
+    script(src='/javascripts/autocomplete.js')
+    
+    

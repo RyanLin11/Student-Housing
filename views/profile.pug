@@ -1,0 +1,6 @@
+extends Layout 
+
+block content 
+    p= user.username 
+    p= user.email
+    a.btn.btn-primary(href='/users/profile/edit') Edit Profile

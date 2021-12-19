@@ -1,0 +1,30 @@
+/*body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}*/
+
+/*div {
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}*/
+
+a {
+  color: #00B7FF;
+}
+
+.animalImage {
+  max-height: 500px;
+}
+
+.listing-photo {
+  max-width: 30%;
+}
+
+.table {
+  margin: 0px auto;
+}
+
+.logo {
+  width: 3%;
+}

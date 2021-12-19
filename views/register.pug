@@ -1,0 +1,29 @@
+extends layout 
+
+block content
+    form(method='POST' action='/users/register')
+        div.form-floating.mb-3 
+            input.form-control(type='text' id='username' name='username' placeholder='John Doe' required)
+            label.form-label(for='username') Username
+        br
+        div.form-floating.mb-3 
+            input.form-control(type='password' id='password' name='password' placeholder='Password' required) 
+            label.form-label(for='password') Password
+        br
+        div.form-floating.mb-3 
+            input.form-control(type='password' id='repassword' name='repassword' placeholder='Password' required)
+            label.form-label(for='repassword') Re-Enter Password
+        br
+        div.form-floating.mb-3 
+            input.form-control(type='email' id='email' name='email' placeholder='johndoe@gmail.com' required) 
+            label.form-label(for='email') Email
+        br
+        input.btn.btn-primary(type='submit' value='Register') 
+        br 
+        if errorMessage
+            div.alert.alert-warning
+                i.bi.bi-exclamation-triangle-fill
+                p=errorMessage
+        p Already a user? 
+            a(href='/users/login') Login here
+            
