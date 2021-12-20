@@ -4,6 +4,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const ListingSchema = new mongoose.Schema({
     location: {
         type: ObjectId,
+        ref: 'Building',
         required: true,
     },
     price: {
@@ -26,8 +27,9 @@ const ListingSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    email: {
-        type: String,
+    leaser: {
+        type: ObjectId,
+        ref: 'User',
         required: true,
     },
     photo: {

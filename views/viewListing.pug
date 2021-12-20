@@ -11,17 +11,18 @@ block content
                 th.text-center.align-middle(scope='col') Room 
                 th.text-center.align-middle(scope='col') Move-In Date 
                 th.text-center.align-middle(scope='col') Move-Out Date 
-                th.text-center.align-middle(scope='col') Email 
+                th.text-center.align-middle(scope='col') Leaser 
             tbody 
             each listing in listings 
                 tr
                     td.text-center.align-middle
                         img.listing-photo(src=listing.photo)
-                    th.text-center.align-middle(scope='row')= listing.location 
+                    th.text-center.align-middle(scope='row')
+                        a(href=`/listing/properties/${listing.location._id}`)= listing.location.name
                     td.text-center.align-middle $#{listing.price}
-                    td.text-center.align-middle= listing.type 
-                    td.text-center.align-middle= listing.room 
-                    td.text-center.align-middle= listing.moveInDate 
+                    td.text-center.align-middle= listing.type
+                    td.text-center.align-middle= listing.room
+                    td.text-center.align-middle= listing.moveInDate
                     td.text-center.align-middle= listing.moveOutDate 
                     td.text-center.align-middle
-                      a(href=`mailto:${listing.email}`)= listing.email 
+                      a(href=`/users/profile/${listing.leaser.username}`)= listing.leaser.username

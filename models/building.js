@@ -21,6 +21,21 @@ const BuildingSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    photos: {
+        type: [String],
+    },
+    phone: {
+        type: String,
+    },
+    website: {
+        type: String,
+    },
+    rating: {
+        type: Number,
+    },
+    rating_count: {
+        type: Number
+    }
 });
 
 const Building = mongoose.model("Building", BuildingSchema);

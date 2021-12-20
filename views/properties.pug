@@ -10,7 +10,10 @@ block content
             tbody 
             each building in buildings 
                 tr
-                    td.text-center.align-middle N/A
-                    td.text-center.align-middle= listing.name 
-                    td.text-center.align-middle= listing.address
+                    td.text-center.align-middle
+                        img(src=`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${building.photos[0]}&key=${api_key}`)
+                    td.text-center.align-middle
+                        a(href=`/listing/properties/${building._id}`)= building.name
+                    td.text-center.align-middle
+                        a(href=building.url)= building.formatted_address
                     

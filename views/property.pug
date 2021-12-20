@@ -1,0 +1,11 @@
+extends Layout 
+
+block content 
+    h1= building.name 
+    img(src=`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${building.photos[0]}&key=${api_key}`)
+    h2 Address: #{building.formatted_address}
+    h2 Rating: #{building.rating} (#{rating_count} ratings)
+    h2 Contact Information
+    h3 Phone: #{building.phone}
+    h3 Website: 
+        a(href=building.website target="_blank") #{building.website}
