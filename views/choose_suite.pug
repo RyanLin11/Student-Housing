@@ -1,0 +1,14 @@
+extends Layout
+
+block content
+    form(method='POST' action='/suite/choose')
+        h1= building.name
+        label(for='suite') Choose your suite:
+        if suites
+            select(name='suite' id='suite' required)
+                each suite in suites
+                    option(value=suite._id)= suite.suite_no
+        input.btn.btn-primary(type='submit' value='Next')
+
+        p Don't see your suite? 
+            a.btn.btn-primary(href=`/suite/add?building_id=${building._id}`) Add it here

@@ -1,7 +1,7 @@
 extends Layout 
 
 block content 
-    form(method='POST' action='/users/profile/edit')
+    form(method='PUT' action='/users/profile')
         label(for='username') Username:
         input(type='text' id='username' placeholder=user.username disabled)
         br

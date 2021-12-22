@@ -4,7 +4,7 @@ const axios = require('axios');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {title: Welcome});
+  res.render('index', {title: 'Welcome'});
 });
 
 module.exports = router;

@@ -1,0 +1,55 @@
+extends layout
+
+block content
+  form(method='POST' action='/listing/add')
+    h3 Suite #{suite.suite_no} Room Details
+    input(type="text" name="suite" value=suite._id hidden)
+    label(for='room_no') Room #: 
+    input(type='number' id='room_no' name='room_no')
+    br
+    label(for='room_size') Size (Sq. ft):
+    input(type='number' id='room_size' name='room_size')
+    br
+    h3 Amenities
+    label(for='window') Window? 
+    input(type='checkbox' id='window' name='window') 
+    br
+    label(for='orientation') Orientation: 
+    input(type='text' id='orientation' name='orientation')
+    br
+    label(for='bathroom') Bathroom? 
+    input(type='checkbox' id='bathroom' name='bathroom')
+    br
+    label(for='air_conditioning') Air Conditioning?
+    input(type='checkbox' id='air_conditioning' name='air_conditioning')
+    br
+    label(for='heating') Heating? 
+    input(type='checkbox' id='heating' name='heating') 
+    br
+    label(for='wifi') Wifi?
+    input(type='checkbox' id='wifi' name='wifi') 
+    br
+    h3 Conditions
+    label(for='pets_allowed') Pets Allowed?
+    input(type='checkbox' id='pets_allowed' name='pets_allowed')
+    br
+    label(for='smoking') Smoking? 
+    input(type='checkbox' id='smoking' name='smoking')
+    br
+    div.input-group
+      span.input-group-text $
+      div.form-floating
+        input.form-control(type='number' id='price' name='price' placeholder='1000' required)
+        label.form-label(for='price') Price
+    br
+    div.form-floating
+      input.form-control(type='date' id='move-in-date' name='moveInDate' required)
+      label.form-label(for='move-in-date') Move-In Date: 
+    br
+    div.form-floating
+      input.form-control(type='date' id='move-out-date' name='moveOutDate' required)
+      label.form-label(for='move-out-date') Move-Out Date: 
+    br
+    input.btn.btn-primary(type='submit' value='Post Listing')
+    br
+    script(src='/javascripts/forms.js')

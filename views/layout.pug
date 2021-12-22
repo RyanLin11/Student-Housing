@@ -18,11 +18,9 @@ html
       div.collapse.navbar-collapse(id='navbarNav') 
         ul.navbar-nav 
           li.nav-item 
-            a.nav-link(href='/listing/properties') Properties 
+            a.nav-link(href='/property') Properties 
           li.nav-item 
-            a.nav-link(href='/listing') Listings 
-          li.nav-item
-            a.nav-link(href='/listing/add') Add Listing
+            a.nav-link(href='/listing') Listings
           if authenticated 
             li.nav-item 
               a.nav-link(href=`/users/profile/${username}`) Hello, #{username}
@@ -30,8 +28,8 @@ html
               a.nav-link(href='/users/logout') Logout
           else
             li.nav-item 
-              a.nav-link(href='/users/login') Login
+              a.nav-link(href='/login') Login
             li.nav-item 
-              a.nav-link(href='/users/register') Register
+              a.nav-link(href='/register') Register
     br
     block content

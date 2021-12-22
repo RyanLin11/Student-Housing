@@ -4,3 +4,8 @@ block content
     p= user.username 
     p= user.email
     a.btn.btn-primary(href='/users/profile/edit') Edit Profile
+
+    h2 My Listings
+    a.btn.btn-primary(href='/property/add') Add Listing
+    for listing in listings 
+        h1= listing.suite.suite_no

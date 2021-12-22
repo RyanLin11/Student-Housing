@@ -1,0 +1,17 @@
+extends Layout
+
+block meta
+  script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAnlwwBl2qo6-mJGWcdT3AUvLdxx8Q2mQ4&libraries=places&callback=initMap')
+
+block content
+    form(method='POST' action='/property/add')
+        h1 Choose your building:
+        div.input-group 
+                span.input-group-text 
+                    i.bi.bi-map 
+                    div.form-floating 
+                        input.form-control(type='text' id='autocomplete' placeholder='Location' required) 
+                        label.form-label(for='autocomplete') Location
+        input(type='text' id='place_id' name='place_id' hidden=true)
+        input.btn.btn-primary(type='submit' value='Next')
+        script(src='/javascripts/autocomplete.js')

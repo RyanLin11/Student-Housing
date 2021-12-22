@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -13,6 +14,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    room: {
+        type: ObjectId,
+        ref: 'Room',
+    }
 });
 
 const User = mongoose.model("User", UserSchema);

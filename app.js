@@ -4,9 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var listingRouter = require('./routes/listing')
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const listingRouter = require('./routes/listing');
+const propertyRouter = require('./routes/property');
+const suiteRouter = require('./routes/suite');
+
+const UserModel = require('./models/user');
+
 const mongoose = require('mongoose');
 
 require('dotenv').config();
@@ -36,25 +41,35 @@ app.use(session({
 }))
 
 // Global middleware
-app.get('/*', function (req, res, next) {
-  res.locals.authenticated = req.session.loggedIn;
-  res.locals.username = req.session.username;
-  next();
+
+//Login Page
+app.get('/login', function(req, res) {
+  res.render('login');
+});
+
+//Register Page
+app.get('/register', function(req, res) {
+  res.render('register');
 })
 
-app.get(['/listing/*', '/listing'], function(req, res, next) {
-  if(!req.session.loggedIn) {
-    res.redirect('/users/login');
+//Redirect to login if not signed in, and passing in user information to locals if logged in
+app.get(['/', '/*'], async function(req, res, next) {
+  if(!req.session) {
+    res.redirect('/login');
   } else {
-    console.log('logged in!');
+    res.locals.user = await UserModel.findById(req.session.user_id);
+    res.locals.authenticated = req.session.loggedIn;
+    res.locals.username = res.locals.user.username;
+    next();
   }
-  next();
 })
 
 // Router middleware
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/listing', listingRouter);
+app.use('/property', propertyRouter);
+app.use('/suite', suiteRouter);
 
 // Connecting to the Database
 mongoose.connect(process.env.ATLAS_URL);

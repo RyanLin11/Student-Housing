@@ -1,0 +1,43 @@
+extends Layout 
+
+block meta
+  script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCvzxMx0b4z0Df79JSqY8T_QYxxFCk1vyg&libraries=places&callback=initMap')
+
+block content 
+    form(method='POST')
+        h1 #{building.name} Suite
+        h2 Basic Info
+        input(type='text' id='building' name='building' value=building._id hidden)
+        label(for='suite_no') Suite #: 
+        input(type='number' id='suite_no' name='suite_no')
+        br
+        label(for='floor') Floor #:
+        input(type='number' id='floor' name='floor')
+        br
+        h2 Amenities 
+        p Please check the following if they are present in your suite:
+        label(for='stove') Stove?
+        input(type='checkbox' id='stove' name='stove')
+        br
+        label(for='microwave') Microwave?
+        input(type='checkbox' id='microwave' name='microwave')
+        br
+        label(for='dishwasher') Dishwasher?
+        input(type='checkbox' id='dishwasher' name='dishwasher') 
+        br
+        label(for='television') Television?
+        input(type='checkbox' id='television' name='television')
+        br
+        label(for='laundry') Laundry Machine?
+        input(type='checkbox' id='laundry' name='laundry')
+        br
+        label(for='dining_area') Dining Area?
+        input(type='checkbox' id='dining_area' name='dining_area') 
+        br
+        label(for='couches') Couches?
+        input(type='checkbox' id='couches' name='couches') 
+        br
+        input(type='submit' value='Add Suite')
+        br
+        script(src='/javascripts/forms.js')
+        

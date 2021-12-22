@@ -1,4 +1,19 @@
 extends Layout 
 
 block content 
+    h1 Room #{listing.room_no} 
+    p(style='color: grey') Suite #{listing.suite.suite_no}, #{listing.suite.building.name}
+    br
+    h2 Room Information 
+    ul 
+        li Room Size: #{listing.room_size} 
+        li Window: #{listing.window} 
+        li Orientation: #{listing.orientation} 
+        li Bathroom: #{listing.bathroom} 
+        li Air Conditioning: #{listing.air_conditioning} 
+        li Heating: #{listing.heating} 
+        li Wifi: #{listing.wifi} 
+        li Pets Allowed: #{listing.pets_allowed} 
+        li Smoking Allowed: #{listing.smoking} 
     
+    a.btn.btn-primary(href=`/users/profile/${listing.leaser}`) Contact Info

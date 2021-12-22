@@ -4,25 +4,21 @@ block content
     table.table.table-responsive.thead-dark.table-striped.table-bordered.table-hover
         thead 
             tr 
-                th.text-center.align-middle(scope='col') Photo
                 th.text-center.align-middle(scope='col') Listing
-                th.text-center.align-middle(scope='col') Price 
-                th.text-center.align-middle(scope='col') Type 
-                th.text-center.align-middle(scope='col') Room 
+                th.text-center.align-middle(scope='col') Price
+                th.text-center.align-middle(scope='col') Suite 
                 th.text-center.align-middle(scope='col') Move-In Date 
                 th.text-center.align-middle(scope='col') Move-Out Date 
                 th.text-center.align-middle(scope='col') Leaser 
             tbody 
             each listing in listings 
                 tr
-                    td.text-center.align-middle
-                        img.listing-photo(src=listing.photo)
                     th.text-center.align-middle(scope='row')
-                        a(href=`/listing/properties/${listing.location._id}`)= listing.location.name
+                        a(href=`/property/${listing.suite.building._id}`)= listing.suite.building.name
                     td.text-center.align-middle $#{listing.price}
-                    td.text-center.align-middle= listing.type
-                    td.text-center.align-middle= listing.room
+                    td.text-center.align-middle
+                        a(href=`/suite/${listing.suite._id}`)= listing.suite.suite_no
                     td.text-center.align-middle= listing.moveInDate
                     td.text-center.align-middle= listing.moveOutDate 
                     td.text-center.align-middle
-                      a(href=`/users/profile/${listing.leaser.username}`)= listing.leaser.username
+                      a.btn.btn-primary(href=`/listing/${listing._id}`) View

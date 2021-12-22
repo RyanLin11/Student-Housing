@@ -8,12 +8,12 @@ block content
                 th.text-center.align-middle(scope='col') Property
                 th.text-center.align-middle(scope='col') Address
             tbody 
-            each building in buildings 
+            each property in properties 
                 tr
                     td.text-center.align-middle
-                        img(src=`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${building.photos[0]}&key=${api_key}`)
+                        img(src=`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${property.photos[0]}&key=${api_key}`)
                     td.text-center.align-middle
-                        a(href=`/listing/properties/${building._id}`)= building.name
+                        a(href=`/property/${property._id}`)= property.name
                     td.text-center.align-middle
-                        a(href=building.url)= building.formatted_address
+                        a(href=property.url)= property.formatted_address
                     

@@ -1,0 +1,15 @@
+extends Layout 
+
+block content 
+    h1 Suite #{suite.suite_no} 
+    p(style='color:grey') #{suite.building.name}, Floor #{suite.floor} 
+    br
+    h2 Amenities 
+    ul
+        li Stove: #{suite.stove}
+        li Microwave: #{suite.microwave}
+        li Dishwasher: #{suite.dishwasher}
+        li Television: #{suite.television}
+        li Laundry: #{suite.laundry}
+        li Dining Area: #{suite.dining_area}
+        li Couches: #{suite.couches}
