@@ -1,7 +1,7 @@
 extends Layout
 
 block meta
-  script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAnlwwBl2qo6-mJGWcdT3AUvLdxx8Q2mQ4&libraries=places&callback=initMap')
+  script(src=`https://maps.googleapis.com/maps/api/js?key=${api_key}&libraries=places&callback=initMap`)
 
 block content
     form(method='POST' action='/property/add')

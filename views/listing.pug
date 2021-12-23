@@ -15,5 +15,8 @@ block content
         li Wifi: #{listing.wifi} 
         li Pets Allowed: #{listing.pets_allowed} 
         li Smoking Allowed: #{listing.smoking} 
+    h3 Move In Day:  #{listing.moveInDate} 
+    h3 Move Out Day: #{listing.moveOutDate} 
     
     a.btn.btn-primary(href=`/users/profile/${listing.leaser}`) Contact Info
+    a.btn.btn-primary(href=`/listing/${listing._id}/edit`) Edit Listing

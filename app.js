@@ -1,21 +1,27 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+//Importing Node Packages
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const fileUpload = require('express-fileupload');
+const mongoose = require('mongoose');
 
+//Configuring Environment Variables
+require('dotenv').config();
+
+//Importing Routers
+const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const listingRouter = require('./routes/listing');
 const propertyRouter = require('./routes/property');
 const suiteRouter = require('./routes/suite');
 
+//Importing Models
 const UserModel = require('./models/user');
 
-const mongoose = require('mongoose');
-
-require('dotenv').config();
-
+//Initiating App
 var app = express();
 
 // view engine setup
@@ -28,6 +34,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(fileUpload({
+  //50mb file limit
+  limit: {fileSize: 50 * 1024 * 1024},
+  abortOnLimit: true,
+}))
 
 // Sessions Management
 const session = require('express-session');
@@ -40,24 +51,15 @@ app.use(session({
   resave: false,
 }))
 
-// Global middleware
-
-//Login Page
-app.get('/login', function(req, res) {
-  res.render('login');
-});
-
-//Register Page
-app.get('/register', function(req, res) {
-  res.render('register');
-})
+// Authentication
+app.use('/', authRouter);
 
 //Redirect to login if not signed in, and passing in user information to locals if logged in
-app.get(['/', '/*'], async function(req, res, next) {
-  if(!req.session) {
+app.all(['/', '/*', '*'], async function(req, res, next) {
+  if(!req.session.loggedIn) {
     res.redirect('/login');
   } else {
-    res.locals.user = await UserModel.findById(req.session.user_id);
+    res.locals.user = await UserModel.findById(req.session.user_id).populate('photo');
     res.locals.authenticated = req.session.loggedIn;
     res.locals.username = res.locals.user.username;
     next();
@@ -73,7 +75,6 @@ app.use('/suite', suiteRouter);
 
 // Connecting to the Database
 mongoose.connect(process.env.ATLAS_URL);
-
 app.listen(3000, () => {
   console.log("Server is running at port 3000");
 })

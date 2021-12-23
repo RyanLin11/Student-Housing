@@ -1,4 +1,7 @@
-    forms(method='PUT' action=`/suite/${suite.suite_id}`)
+extends Layout 
+
+block content
+    form(method='POST' action=`/suite/${suite._id}/edit` enctype='multipart/form-data')
         label(for='suite_no') Suite #: 
         input(type='number' id='suite_no' name='suite_no' value=suite.suite_no)
         br
@@ -8,27 +11,28 @@
         h2 Amenities 
         p Please check the following if they are present in your suite:
         label(for='stove') Stove?
-        input(type='checkbox' id='stove' name='stove' value=suite.stove)
+        input(type='checkbox' id='stove' name='stove' checked=suite.stove)
         br
         label(for='microwave') Microwave?
-        input(type='checkbox' id='microwave' name='microwave' value=suite.microwave)
+        input(type='checkbox' id='microwave' name='microwave' checked=suite.microwave)
         br
         label(for='dishwasher') Dishwasher?
-        input(type='checkbox' id='dishwasher' name='dishwasher' value=suite.dishwasher) 
+        input(type='checkbox' id='dishwasher' name='dishwasher' checked=suite.dishwasher) 
         br
         label(for='television') Television?
-        input(type='checkbox' id='television' name='television' value=suite.television)
+        input(type='checkbox' id='television' name='television' checked=suite.television)
         br
         label(for='laundry') Laundry Machine?
-        input(type='checkbox' id='laundry' name='laundry' value=suite.laundry)
+        input(type='checkbox' id='laundry' name='laundry' checked=suite.laundry)
         br
         label(for='dining_area') Dining Area?
-        input(type='checkbox' id='dining_area' name='dining_area' value=suite.dining_area) 
+        input(type='checkbox' id='dining_area' name='dining_area' checked=suite.dining_area) 
         br
         label(for='couches') Couches?
-        input(type='checkbox' id='couches' name='couches' value=suite.couches) 
+        input(type='checkbox' id='couches' name='couches' checked=suite.couches) 
         br
-        input(type='submit' value='Add Suite')
+        label(for='photos') Photos: 
+        input(type='file' id='photos' name='photos' accept="image/png, image/jpeg, image/jpg" multiple)
+        input(type='submit' value='Edit Suite')
         br
-        script(src='/javascripts/autocomplete.js')
-        script(src='/javascripts/forms.js')
+    script(src='/javascripts/forms.js')

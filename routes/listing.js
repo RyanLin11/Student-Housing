@@ -6,8 +6,6 @@ const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types;
 
 async function add_listing(req, res) {
-    req.body.moveInDate = new Date(req.body.moveInDate).toDateString();
-    req.body.moveOutDate = new Date(req.body.moveOutDate).toDateString();
     req.body.suite = ObjectId(req.body.suite);
     req.body.leaser = req.session.user_id;
     const listing = new ListingModel(req.body);
@@ -34,8 +32,19 @@ async function view_listing(req, res, next) {
     res.render('listing', {listing: listing});
 }
 
+async function edit_listing_form(req, res, next) {
+    const listing = await ListingModel.findById(req.params.listing_id);
+    res.render('edit_listing', {listing: listing});
+}
 async function edit_listing(req, res, next) {
-    await ListingModel.findByIdAndUpdate(req.params.listing_id);
+    // Unchecked Checkboxes are not sent
+    let amenities = ['window', 'orientation', 'bathroom', 'air_conditioning', 'heating', 'wifi', 'pets_allowed', 'smoking'];
+    amenities.forEach(amenity => {
+        if(!(amenity in req.body)) {
+            req.body[amenity] = false;
+        }
+    });
+    await ListingModel.findByIdAndUpdate(req.params.listing_id, req.body);
     res.redirect(`/listing/${req.params.listing_id}`);
 }
 
@@ -48,7 +57,8 @@ router.get("/", view_listings);
 router.post("/add", add_listing);
 router.get("/add", add_listing_form);
 router.get('/:listing_id', view_listing);
-router.put('/:listing_id', edit_listing);
+router.get('/:listing_id/edit', edit_listing_form);
+router.post('/:listing_id/edit', edit_listing);
 router.delete('/:listing_id', delete_listing);
 
 module.exports = router;

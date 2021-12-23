@@ -1,11 +1,32 @@
 extends Layout 
 
-block content 
-    p= user.username 
-    p= user.email
-    a.btn.btn-primary(href='/users/profile/edit') Edit Profile
+block meta 
+    link(rel='stylesheet', href='/stylesheets/profile.css')
 
-    h2 My Listings
-    a.btn.btn-primary(href='/property/add') Add Listing
-    for listing in listings 
-        h1= listing.suite.suite_no
+block content 
+    div.container 
+        div.row
+            div.col-sm.col-md-2.col-lg-2.container.justify-content-center.align-items-center
+                div.row.align-items-center.h-80
+                    img.rounded-circle.border.border-info.profile-image(src=user.photo.photo_url)
+                div.row.align-items-center.h-20
+                    a.btn.btn-primary(href=`/users/profile/${user.username}/edit`) Edit Profile
+            div.col-sm.col-md-6.col-lg-6.container
+                h1 #{user.first_name} #{user.last_name} 
+                    span.handle @#{user.username}
+                if user.university 
+                    p Education: #{user.university} 
+                if user.program 
+                    p Program: #{user.program} 
+                if user.term 
+                    p Study Term: #{user.term}
+                p 
+                    i.bi.bi-envelope 
+                    a(href=`mailto:${user.email}`)= user.email
+        hr
+        div.row.justify-content-center
+            div.col-auto
+                h1 My Listings
+                a.btn.btn-primary(href='/property/add') Add Listing
+                for listing in listings 
+                    h1= listing.suite.suite_no

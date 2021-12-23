@@ -10,6 +10,12 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    first_name: {
+        type: String,
+    },
+    last_name: {
+        type: String,
+    },
     email: {
         type: String,
         required: true,
@@ -17,7 +23,20 @@ const UserSchema = new mongoose.Schema({
     room: {
         type: ObjectId,
         ref: 'Room',
-    }
+    },
+    university: {
+        type: String,
+    },
+    term: {
+        type: String,
+    },
+    program: {
+        type: String,
+    },
+    photo: {
+        type: ObjectId,
+        ref: 'Photo',
+    },
 });
 
 const User = mongoose.model("User", UserSchema);

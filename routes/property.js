@@ -2,34 +2,16 @@ const express = require('express');
 const router = express.Router();
 const BuildingModel = require('../models/building');
 const url = require('url');
-const axios = require('axios');
 
 function create_building_form(req, res, next) {
-    res.render('choose_building');
+    res.render('choose_building', {api_key: process.env.MAPS_JS_API_KEY});
 }
 
 async function create_building(req, res, next) {
     let db_building = await BuildingModel.findOne({place_id: req.body.place_id});
     if(!db_building) {
-        const response = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${req.body.place_id}&fields=formatted_address,name,geometry,url,photo,formatted_phone_number,website,rating,user_ratings_total&key=${process.env.MAPS_API_KEY}`);
-        let data = response.data.result;
-        let building_info = {
-            place_id: req.body.place_id,
-            name: data.name,
-            latitude: data.geometry.location.lat,
-            longitude: data.geometry.location.lng,
-            formatted_address: data.formatted_address,
-            map_url: data.url,
-            photos: (data.photos? data.photos.map(photoElement => photoElement.photo_reference) : undefined),
-            phone: data.formatted_phone_number,
-            website: data.website,
-            rating: data.rating,
-            rating_count: data.user_ratings_total,
-        };
-        db_building = new BuildingModel(building_info);
-        await db_building.save();
+        db_building = await BuildingModel.createWithPlaceID(req.body.place_id);
     }
-    console.log(db_building._id.toString());
     res.redirect(url.format({
         pathname: `/suite/choose`,
         query: {

@@ -1,15 +1,32 @@
 extends Layout 
 
+block meta 
+    link(rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css')
+
 block content 
-    h1 Suite #{suite.suite_no} 
-    p(style='color:grey') #{suite.building.name}, Floor #{suite.floor} 
-    br
-    h2 Amenities 
-    ul
-        li Stove: #{suite.stove}
-        li Microwave: #{suite.microwave}
-        li Dishwasher: #{suite.dishwasher}
-        li Television: #{suite.television}
-        li Laundry: #{suite.laundry}
-        li Dining Area: #{suite.dining_area}
-        li Couches: #{suite.couches}
+    div.container
+        h1 Suite #{suite.suite_no} 
+        p(style='color:grey') #{suite.building.name}, Floor #{suite.floor} 
+        br
+        div.glider-contain 
+            div.glider
+                each photo in suite.photos 
+                    div
+                        img(style='height:100%; width:95%' src=photo.photo_url) 
+            button.glider-prev(aria-label="Previous") «
+            button.glider-next(aria-label="Next") »
+            div.dots(role='tablist')
+        
+        h2 Amenities 
+        ul
+            li Stove: #{suite.stove}
+            li Microwave: #{suite.microwave}
+            li Dishwasher: #{suite.dishwasher}
+            li Television: #{suite.television}
+            li Laundry: #{suite.laundry}
+            li Dining Area: #{suite.dining_area}
+            li Couches: #{suite.couches}
+        
+        a.btn.btn-primary(href=`/suite/${suite._id}/edit`) Edit Suite
+    script(src='https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js')
+    script(src='/javascripts/slides.js')

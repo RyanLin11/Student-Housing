@@ -1,12 +1,29 @@
 extends Layout 
 
 block content 
-    form(method='PUT' action='/users/profile')
+    form(method='POST' action=`/users/profile/${user.username}/edit` enctype='multipart/form-data')
         label(for='username') Username:
         input(type='text' id='username' placeholder=user.username disabled)
         br
-        label(for='email') Email: 
-        input(type='email' id='email' name='email' placeholder=user.email)
+        label(for='first_name') First Name: 
+        input(type='text' id='first_name' name='first_name' value=user.first_name) 
         br
+        label(for='last_name') Last Name: 
+        input(type='text' id='last_name' name='last_name' value=user.last_name)
+        br
+        label(for='email') Email: 
+        input(type='email' id='email' name='email' value=user.email)
+        br
+        label(for='university') University: 
+        input(type='text' id='university' name='university' value=user.university) 
+        br 
+        label(for='term') Study Term: 
+        input(type='text' id='term' name='term' value=user.term) 
+        br 
+        label(for='program') Program of Study: 
+        input(type='text' id='program' name='program' value=user.program) 
+        br
+        label(for='photo') Profile Photo: 
+        input(type='file' id='photo' name='photo' accept="image/png, image/jpeg, image/jpg")
         input(type='submit' value='Update Profile')
     br

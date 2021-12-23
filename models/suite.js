@@ -42,6 +42,10 @@ const SuiteSchema = new mongoose.Schema({
     couches: {
         type: Boolean,
         default: false,
+    },
+    photos: {
+        type: [ObjectId],
+        ref: "Photo",
     }
 });
 const Suite = new mongoose.model("Suite", SuiteSchema);

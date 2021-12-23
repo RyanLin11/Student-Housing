@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  form(method='PUT' action=`/listing/${listing._id}`)
+  form(method='POST' action=`/listing/${listing._id}/edit`)
     h3 Add Room Details
     label(for='room_no') Room #: 
     input(type='number' id='room_no' name='room_no' value=listing.room_no)
@@ -11,31 +11,29 @@ block content
     br
     h3 Amenities
     label(for='window') Window? 
-    input(type='checkbox' id='window' name='window' value=listing.window) 
+    input(type='checkbox' id='window' name='window' checked=listing.window) 
     br
     label(for='orientation') Orientation: 
     input(type='text' id='orientation' name='orientation' value=listing.orientation)
     br
     label(for='bathroom') Bathroom? 
-    input(type='checkbox' id='bathroom' name='bathroom' value=listing.bathroom)
+    input(type='checkbox' id='bathroom' name='bathroom' checked=listing.bathroom)
     br
     label(for='air_conditioning') Air Conditioning?
     input(type='checkbox' id='air_conditioning' name='air_conditioning' value=listing.air_conditioning)
     br
     label(for='heating') Heating? 
-    input(type='checkbox' id='heating' name='heating' value=listing.heating) 
+    input(type='checkbox' id='heating' name='heating' checked=listing.heating) 
     br
     label(for='wifi') Wifi?
-    input(type='checkbox' id='wifi' name='wifi' value=listing.wifi) 
+    input(type='checkbox' id='wifi' name='wifi' checked=listing.wifi) 
     br
     h3 Conditions
     label(for='pets_allowed') Pets Allowed?
-    input(type='checkbox' id='pets_allowed' name='pets_allowed' value=listing.pets_allowed)
+    input(type='checkbox' id='pets_allowed' name='pets_allowed' checked=listing.pets_allowed)
     br
     label(for='smoking') Smoking? 
-    input(type='checkbox' id='smoking' name='smoking' value=listing.smoking)
-    br
-    input(type='submit' value='Add Room')
+    input(type='checkbox' id='smoking' name='smoking' checked=listing.smoking)
     br
     div.input-group
       span.input-group-text $
@@ -44,13 +42,13 @@ block content
         label.form-label(for='price') Price
     br
     div.form-floating
-      input.form-control(type='date' id='move-in-date' name='moveInDate' required)
+      input.form-control(type='date' id='move-in-date' name='moveInDate' value=listing.moveInDate required)
       label.form-label(for='move-in-date') Move-In Date: 
     br
     div.form-floating
-      input.form-control(type='date' id='move-out-date' name='moveOutDate' required)
+      input.form-control(type='date' id='move-out-date' name='moveOutDate' value=listing.moveOutDate required)
       label.form-label(for='move-out-date') Move-Out Date: 
     br
     input.btn.btn-primary(type='submit' value='Post Listing')
     br
-    script(src='/javascripts/forms.js')
+  script(src='/javascripts/forms.js')
