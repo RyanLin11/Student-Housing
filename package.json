@@ -22,10 +22,12 @@
     "http-errors": "~1.6.3",
     "mongoose": "^6.1.2",
     "mongoose-autopopulate": "^0.16.0",
-    "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"
+    "morgan": "~1.9.1"
   },
   "engines": {
     "node": "14.x"
+  },
+  "devDependencies": {
+    "pug": "^3.0.2"
   }
 }
