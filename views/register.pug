@@ -26,4 +26,9 @@ block content
                 p=errorMessage
         p Already a user? 
             a(href='/users/login') Login here
+    if errors
+        h2 Errors
+        ul
+            each error in errors 
+                li= error.msg
             

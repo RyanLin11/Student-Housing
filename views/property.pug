@@ -1,11 +1,26 @@
 extends Layout 
 
+block meta 
+    link(rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css')
+
 block content 
-    h1= property.name 
-    img(src=`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${property.photos[0]}&key=${api_key}`)
-    h2 Address: #{property.formatted_address}
-    h2 Rating: #{property.rating} (#{property.rating_count} ratings)
-    h2 Contact Information
-    h3 Phone: #{property.phone}
-    h3 Website: 
-        a(href=property.website target="_blank") #{property.website}
+    div.container
+        h1= property.name
+        p(style='color:grey')= property.formatted_address 
+
+        div.glider-contain 
+                div.glider
+                    each photo in property.photos 
+                        div
+                            img(style='height:100%; width:95%' src=`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photo}&key=${api_key}`)
+                button.glider-prev(aria-label="Previous") «
+                button.glider-next(aria-label="Next") »
+                div.dots(role='tablist')
+        
+        h2 Rating: #{property.rating} (#{property.rating_count} ratings)
+        h2 Contact Information
+        h3 Phone: #{property.phone}
+        h3 Website: 
+            a(href=property.website target="_blank") #{property.website}
+        script(src='https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js')
+        script(src='/javascripts/slides.js')

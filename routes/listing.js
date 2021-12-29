@@ -4,9 +4,9 @@ const ListingModel = require('../models/listing');
 const SuiteModel = require('../models/suite');
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Types;
+const {body} = require('express-validator');
 
 async function add_listing(req, res) {
-    req.body.suite = ObjectId(req.body.suite);
     req.body.leaser = req.session.user_id;
     const listing = new ListingModel(req.body);
     try {
@@ -54,7 +54,11 @@ async function delete_listing(req, res) {
 }
 
 router.get("/", view_listings);
-router.post("/add", add_listing);
+router.post("/add",
+    body('suite').customSanitizer(value => {
+        return ObjectId(value);
+    }),
+    add_listing);
 router.get("/add", add_listing_form);
 router.get('/:listing_id', view_listing);
 router.get('/:listing_id/edit', edit_listing_form);

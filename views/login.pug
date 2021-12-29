@@ -21,4 +21,9 @@ block content
         p New to Student Housing? 
             a(href='/users/register') Register here
         br
-    
+    if errors
+        h2 Errors
+        ul
+            each error in errors 
+                li= error.msg
+            

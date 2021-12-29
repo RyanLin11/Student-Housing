@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
+const PhotoModel = require('./photo');
+const ListingModel = require('./listing');
 
 const SuiteSchema = new mongoose.Schema({
     building: {
@@ -46,8 +48,31 @@ const SuiteSchema = new mongoose.Schema({
     photos: {
         type: [ObjectId],
         ref: "Photo",
+    },
+    listings: {
+        type: [ObjectId],
+        ref: "Listing",
     }
 });
+
+SuiteSchema.pre('deleteOne', {document:true, query:false}, function(next) {
+    //Delete Photos
+    if(this.photos) {
+        this.photos.forEach(photo_id => {
+            const photo = PhotoModel.findById(photo_id);
+            photo.deleteOne();
+        })
+    }
+    //Delete Listings
+    if(this.listings) {
+        this.listings.forEach(listing_id => {
+            const listing = ListingModel.findById(listing_id);
+            listing.deleteOne();
+        })
+    }
+    next();
+});
+
 const Suite = new mongoose.model("Suite", SuiteSchema);
 
 module.exports = Suite;
